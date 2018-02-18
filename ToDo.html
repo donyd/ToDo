@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Todo">
     <head>
         <title>To Do</title>
+        <script src="angular.js"></script>
+        <link rel="stylesheet" type="text/css" href="todo.css">
+
+        <script>
+                // Todo module
+                var Todo = angular.module("Todo", []);
         
+                // Create and register controller to module
+                Todo.controller("ToDoCtrl", function($scope){
+                    // Creating an array holder for items
+                    $scope.items = [
+                        { name: 'Sample Item'}
+                    ];
+        
+        
+                    // Function to add items to array... fingers crossed X=
+                    $scope.add = function (item){
+                        $scope.items.push(item);
+                    };           
+        
+                });
+            </script>
     </head>
-    <body>
+
+    <body ng-controller="ToDoCtrl">
+        <h1>To Do</h1>
+        <ul ng-repeat="item in items">
+            <li>{{ item.name }}</li>
+        </ul>
+        <input type="text" ng-model="new.name"/>
+        <button type="button" ng-click="add(new)">Add</button>
+
+
 
     </body>
-    <script src="angular.js"></script>
+    
 </html>
