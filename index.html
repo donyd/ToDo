@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Todo">
+    <meta charset="utf-8"/>
+    <head>
+        <title>To Do</title>
+        <script src="angular.js"></script>
+        <link rel="stylesheet" type="text/css" href="todo.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+        <script>
+                // Todo module
+                var Todo = angular.module("Todo", []);
+        
+                // Create and register controller to module
+                Todo.controller("ToDoCtrl", function($scope){
+                    // Creating an array holder for items
+                    $scope.items = [
+                        //{ name: 'Sample Item'}
+                        
+                    ];
+        
+        
+                    // Function to add items to array... fingers crossed X=
+                    $scope.add = function (){
+                        $scope.items.push($scope.new);
+                        $scope.new = '';
+                        
+                    };           
+        
+                });
+            </script>
+    </head>
+
+    <body ng-controller="ToDoCtrl">
+        <h1>To Do</h1>
+        <ul ng-repeat="item in items track by $index">
+            <li>{{ item }}</li>
+        </ul>
+        <input type="text" ng-model="new"/>
+        <button type="submit" ng-click="add()">Add</button>
+
+
+
+    </body>
+    
+</html>
