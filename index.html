@@ -32,6 +32,15 @@
                         $scope.items.splice(index, 1);
                     }
 
+                    // Edit function stump currently just removes list item...
+                    $scope.update = function(index, item){
+                        $scope.items[index] = item;
+                    }
+
+                    // initialisation of variable to show/hide edit and update buttons
+                    $scope.editShow = true;
+                    $scope.updateShow = false;
+                                        
                 });
             </script>
     </head>
@@ -40,8 +49,15 @@
        <div clas="container">
         <h1>To Do</h1>
         <ul ng-repeat="item in items track by $index">
-            <li>{{ item }} <button type="submit" ng-click="del($index)">X</button></li>
-            
+            <li>{{ item }}
+                    <!--  Edit button -->
+                    <input type="text" ng-model="editedItem" ng-show="showEditInput" />
+                    <button type="submit" ng-show="editShow" ng-click="editShow = false; updateShow = true; showEditInput = true;">Edit</button>
+                    <button type="submit" ng-show="updateShow" ng-click="update($index, editedItem); updateShow= false; showEditInput = false; editShow = true;">Update</button>
+                                        
+                    <!--  Delete button -->
+                    <button type="submit" ng-click="del($index)">X</button>
+            </li>          
         </ul>
         <input type="text" ng-model="new"/>
         <button type="submit" ng-click="add()">Add</button>
